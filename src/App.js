@@ -3,19 +3,22 @@ import "./App.css";
 export default function App() {
   return (
     <div className="App">
-      <h1>Weather App</h1>
-      <footer>
-        {" "}
-        This project was coded by Ana Franco and it is{" "}
-        <a
-          href="https://github.com/anamspe/react-temp-app"
-          target="_blank"
-          rel="noreferrer"
-        >
+      <div className="container">
+        <h1>Weather App</h1>
+        <footer>
           {" "}
-          open-sourced on GitHub
-        </a>. 
-      </footer>
+          This project was coded by Ana Franco and it is{" "}
+          <a
+            href="https://github.com/anamspe/react-temp-app"
+            target="_blank"
+            rel="noreferrer"
+          >
+            {" "}
+            open-sourced on GitHub
+          </a>
+          .
+        </footer>
+      </div>
     </div>
   );
 }
