@@ -1,6 +1,10 @@
 import React, { useState } from "react";
 import axios from "axios";
 import "./Weather.css";
+import FormattedDate from "./FormattedDate";
+import FormattedTime from "./FormattedTime";
+import FormattedSunrise from "./FormattedSunrise";
+import FormattedSunset from "./FormattedSunset"
 
 export default function Weather(props) {
   const [weather, setWeather] = useState({ ready: false });
@@ -10,8 +14,8 @@ export default function Weather(props) {
       ready: true,
 
       iconUrl: "https://cdn-icons-png.flaticon.com/512/7084/7084486.png",
-      date: "Tue, Feb 28",
-      time: "4:00 pm",
+      date: new Date(response.data.dt * 1000),
+      time: new Date(response.data.dt * 1000),
 
       temperature: response.data.main.temp,
       max_temp: response.data.main.temp_max,
@@ -23,8 +27,8 @@ export default function Weather(props) {
       wind: response.data.wind.speed,
       feel: response.data.main.feels_like,
 
-      sunrise: response.data.sys.sunrise,
-      sunset: response.data.sys.sunset
+      sunrise: new Date(response.data.sys.sunrise * 1000),
+      sunset: new Date(response.data.sys.sunset * 1000),
     });
   }
 
@@ -45,8 +49,12 @@ export default function Weather(props) {
             </a>
           </div>
           <div className="row mt-3">
-            <div className="col-6">{weather.date}</div>
-            <div className="col-6">{weather.time}</div>
+            <div className="col-6">
+              <FormattedDate date={weather.date} />
+            </div>
+            <div className="col-6">
+              <FormattedTime time={weather.time} />
+            </div>
           </div>
         </div>
         <div className="currentWeatherCard mt-4">
@@ -73,8 +81,8 @@ export default function Weather(props) {
             <p>💨 Feels like: {Math.round(weather.feel)}ºC </p>
           </div>
           <div className="row">
-            <div className="col-6">🌞 06:54 am</div>
-            <div className="col-6">🌙 5:53 pm</div>
+            <div className="col-6">🌞 <FormattedSunrise time={weather.sunrise} /></div>
+            <div className="col-6">🌙 <FormattedSunset time={weather.sunset} /></div>
           </div>
         </div>
       </div>
