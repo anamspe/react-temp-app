@@ -10,7 +10,7 @@ export default function Weather(props) {
     setWeather({
       ready: true,
 
-      iconUrl: "https://cdn-icons-png.flaticon.com/512/7084/7084486.png",
+      icon: response.data.weather[0].icon,
       date: new Date(response.data.dt * 1000),
       time: new Date(response.data.dt * 1000),
 
