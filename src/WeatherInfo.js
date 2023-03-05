@@ -3,7 +3,8 @@ import FormattedDate from "./FormattedDate";
 import FormattedTime from "./FormattedTime";
 import FormattedSunrise from "./FormattedSunrise";
 import FormattedSunset from "./FormattedSunset";
-import WeatherIcon from "./WeatherIcon"
+import WeatherIcon from "./WeatherIcon";
+import WeatherTemperature from "./WeatherTemperature";
 
 export default function WeatherInfo(props) {
   return (
@@ -21,26 +22,17 @@ export default function WeatherInfo(props) {
           {" "}
           📍 {props.data.city}, {props.data.country}
         </h1>
-        <WeatherIcon code={props.data.icon}/>
+        <WeatherIcon code={props.data.icon} />
         {/* <img src={props.data.iconUrl} alt={props.data.description} /> */}
         <p className="text-capitalize">{props.data.description}</p>
-        <h2>{Math.round(props.data.temperature)}ºC</h2>
-        <small>
-          ({Math.round(props.data.min_temp)}ºC ↔{" "}
-          {Math.round(props.data.max_temp)}
-          ºC)
-        </small>
-      </div>
-      <div className="row attributes">
-        <div className="col-4 windControl">
-          <p>🍃 Wind: {Math.round(props.data.wind)}km/h </p>
-        </div>
-        <div className="col-4 humControl">
-          <p>💦 Humidity: {props.data.humidity}% </p>
-        </div>
-        <div className="col-4 preControl">
-          <p>💨 Feels like: {Math.round(props.data.feel)}ºC </p>
-        </div>
+        <WeatherTemperature
+          celsius={props.data.temperature}
+          min={props.data.min_temp}
+          max={props.data.max_temp}
+          feel={props.data.feel}
+          wind={props.data.wind}
+          humidity={props.data.humidity}
+        />
         <div className="row">
           <div className="col-6">
             🌞 <FormattedSunrise time={props.data.sunrise} />
