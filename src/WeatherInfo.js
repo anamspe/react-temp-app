@@ -6,6 +6,7 @@ import FormattedSunset from "./FormattedSunset";
 import WeatherIcon from "./WeatherIcon";
 import WeatherTemperature from "./WeatherTemperature";
 
+
 export default function WeatherInfo(props) {
   return (
     <div className="WeatherInfo">
@@ -23,7 +24,6 @@ export default function WeatherInfo(props) {
           📍 {props.data.city}, {props.data.country}
         </h1>
         <WeatherIcon code={props.data.icon} />
-        {/* <img src={props.data.iconUrl} alt={props.data.description} /> */}
         <p className="text-capitalize">{props.data.description}</p>
         <WeatherTemperature
           celsius={props.data.temperature}
@@ -41,6 +41,7 @@ export default function WeatherInfo(props) {
             🌙 <FormattedSunset time={props.data.sunset} />
           </div>
         </div>
+        
       </div>{" "}
     </div>
   );
