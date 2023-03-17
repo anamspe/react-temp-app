@@ -1,13 +1,22 @@
-.WeatherForecast {
+.WeatherForecast .col {
   text-align: center;
+  background-color: #faf6e9;
+  border-radius: 20px;
+  padding: 18px;
+  box-shadow: 2px 3px 5px #c0c1c29f;
+  margin-top: 25px;
+}
+
+.Forecast-icon {
+  font-size: 15px;
 }
 
 .Forecast-max {
-    font-weight: bold;
+  font-weight: bold;
 }
 
 .Forecast-min {
-    font-weight: bold;
+  font-weight: bold;
   opacity: 0.6;
   margin-right: 5px;
 }

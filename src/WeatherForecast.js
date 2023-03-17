@@ -1,35 +1,44 @@
-import React from "react";
-import WeatherIcon from "./WeatherIcon";
+import React, { useState } from "react";
+import WeatherForecastDay from "./WeatherForecastDay";
 import axios from "axios";
 
 import "./WeatherForecast.css";
 
 export default function WeatherForecast(props) {
+  const [loaded, setLoaded] = useState(false);
+  const [forecast, setForecast] = useState(null);
+
   function handleResponse(response) {
-    console.log(response.data);
+    setForecast(response.data.daily);
+    setLoaded(true);
   }
 
-  let apiKey = `50fa4024e3b1d5eac2f51ab18a47e997`;
-  let lon = props.coordinates.lon;
-  let lat = props.coordinates.lat;
-  let apiUrl = `https://api.openweathermap.org/data/3.0/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
-
-  axios.get(apiUrl).then(handleResponse);
-
-  return (
-    <div className="WeatherForecast">
-      <div className="row">
-        <div className="col">
-          <div>Thu</div>
-          <div className="Forecast-icon">
-            <WeatherIcon code="01d" />
-          </div>
-          <div>
-            <span className="Forecast-min">10º</span>{" "}
-            <span className="Forecast-max">19º</span>
-          </div>
+  if (loaded) {
+    return (
+      <div className="WeatherForecast">
+        <div className="row">
+          {forecast.map(function (dailyForecast, index) {
+            if (index < 4) {
+              return (
+                <div className="col" key={index}>
+                  <WeatherForecastDay data={dailyForecast} />
+                </div>
+              );
+            } else {
+              return null;
+            }
+          })}
         </div>
       </div>
-    </div>
-  );
+    );
+  } else {
+    let apiKey = `50fa4024e3b1d5eac2f51ab18a47e997`;
+    let lon = props.coordinates.lon;
+    let lat = props.coordinates.lat;
+    let apiUrl = `https://api.openweathermap.org/data/2.5/onecall?lat=${lat}&lon=${lon}&appid=${apiKey}&units=metric`;
+
+    axios.get(apiUrl).then(handleResponse);
+
+    return null;
+  }
 }
